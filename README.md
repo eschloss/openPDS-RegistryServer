@@ -17,11 +17,11 @@ openPDS - Registry Server
     
     >source bin/activate
     
-    >git clone git@github.com:HumanDynamics/openPDS-RegistryServer.git -b master
+    >git clone https://github.com/eschloss/openPDS-RegistryServer -b master
 
     >cd openPDS-RegistryServer
     
-    >pip install -r conf/requirements.txt
+    >pip install -r requirements.txt
 
     >cd registryServer
     
@@ -29,4 +29,11 @@ openPDS - Registry Server
     
     >python manage.py runserver 0.0.0.0:8000 (for access to local VM)
     
-* The above steps will get you started with a registry server on port 8000 of your machine's loopback interface (for local access only). 
+* The above steps will get you started with a registry server on port 8000 of your machine's loopback interface (for local access only).
+
+* Additional steps required for full openpds setup
+    
+    >change pdsDefaultLocation in settings.py file
+    
+        
+    

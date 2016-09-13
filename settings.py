@@ -1,6 +1,13 @@
 # XXX - bring back default comments to this file...
 import os
 
+try:
+    BUILD = os.environ['BUILD']
+except:
+    BUILD = 'DEV'
+IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
+DEBUG = not IS_PRODUCTION_ENVIRONMENT
+
 pdsDefaultLocation = "pds.linkedpersonaldata.org"
 SERVER_UPLOAD_DIR = '/var/www/trustframework/'
 
@@ -10,22 +17,22 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 
-DATABASES = {
-    'default': {
-        # supported db backends are 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'
-        #'ENGINE': 'django.db.backends.mysql', 
-        'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': '/var/www/trustframework/registryEnv/OMS-RegistryServer/test.db',      
-        #'NAME': 'test.db',      
-        'USER': 'default',      
-        'PASSWORD': 'default',  
-        'HOST': '',      
-        'PORT': '',      
-#	'OPTIONS': {
-#		'read_default_file': '/etc/mysql/my.cnf',
-#		},
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', 
+            'NAME': 'test.db',      
+            'USER': 'default',      
+            'PASSWORD': 'default',  
+            'HOST': '',      
+            'PORT': '',      
+        }
     }
-}
+else:
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] =  dj_database_url.config()
+    DATABASES['default']['CONN_MAX_AGE'] = None
 
 # where can we find db fixtures?
 FIXTURE_DIRS = (
