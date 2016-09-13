@@ -10,6 +10,8 @@ openPDS - Registry Server
     >apt-get install python-pip
     
     >apt-get install python-virtualenv
+    
+    >make sure you have the heroku CLI installed
 
     >virtualenv registryEnv
     
@@ -17,9 +19,15 @@ openPDS - Registry Server
     
     >source bin/activate
     
-    >git clone https://github.com/eschloss/openPDS-RegistryServer -b master
+    >go to https://github.com/eschloss/openPDS-RegistryServer and fork it
+    
+    >setup a new heroku app using the forked repository
+    
+    >git clone {{ URL to your forked github repository }} -b master
 
     >cd openPDS-RegistryServer
+    
+    >heroku git:remote -a {{name of your heroku app}}
     
     >pip install -r requirements.txt
 
@@ -34,6 +42,15 @@ openPDS - Registry Server
 * Additional steps required for full openpds setup
     
     >change pdsDefaultLocation in settings.py file
+    
+    >provision a postgres database in the heroku dashboard or CLI
+    
+    >provision newrelic for monitoring or remove newrelic from the Procfile and requirements.txt
+    
+* sync the production database
+    > heroku run python manage.py syncdb
+    
+    > choose a superuser username/password when prompted
     
         
     

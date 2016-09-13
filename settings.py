@@ -7,15 +7,12 @@ except:
     BUILD = 'DEV'
 IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
 DEBUG = not IS_PRODUCTION_SERVER
+TEMPLATE_DEBUG = DEBUG
 
 pdsDefaultLocation = "pds.linkedpersonaldata.org"
 SERVER_UPLOAD_DIR = '/var/www/trustframework/'
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
 
 if DEBUG:
     DATABASES = {
