@@ -9,7 +9,7 @@ IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
 DEBUG = not IS_PRODUCTION_SERVER
 TEMPLATE_DEBUG = DEBUG
 
-pdsDefaultLocation = "pds.linkedpersonaldata.org"
+pdsDefaultLocation = "https://flufuture-openpds.herokuapp.com"
 SERVER_UPLOAD_DIR = '/var/www/trustframework/'
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
