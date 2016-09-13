@@ -13,6 +13,7 @@ mongoengine==0.8.7
 requests==2.3.0
 django-4store==0.3
 django-allauth==0.17.0
+newrelic # only necessary if you're using the newrelic add-on
 
 # oauth2app
 https://github.com/hiidef/oauth2app/tarball/master
