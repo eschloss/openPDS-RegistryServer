@@ -6,7 +6,7 @@ try:
 except:
     BUILD = 'DEV'
 IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
-DEBUG = not IS_PRODUCTION_ENVIRONMENT
+DEBUG = not IS_PRODUCTION_SERVER
 
 pdsDefaultLocation = "pds.linkedpersonaldata.org"
 SERVER_UPLOAD_DIR = '/var/www/trustframework/'
