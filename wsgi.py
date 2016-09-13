@@ -16,8 +16,9 @@ framework.
 import os
 import sys
 import site
+from django import conf
 
-django.conf.ENVIRONMENT_VARIABLE = "DJANGO_REGISTRY_SETTINGS_MODULE"
+conf.ENVIRONMENT_VARIABLE = "DJANGO_REGISTRY_SETTINGS_MODULE"
 
 os.environ.setdefault("DJANGO_REGISTRY_SETTINGS_MODULE", "registryServer.settings")
 
