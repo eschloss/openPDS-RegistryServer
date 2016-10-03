@@ -6,10 +6,17 @@ try:
 except:
     BUILD = 'DEV'
 IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
+IS_STAGING_SERVER = (BUILD == 'STAGING')
 DEBUG = not IS_PRODUCTION_SERVER
 TEMPLATE_DEBUG = DEBUG
 
-pdsDefaultLocation = "https://flufuture-openpds.herokuapp.com"
+if IS_PRODUCTION_SERVER:
+    pdsDefaultLocation = "https://flumoji-pds-production.herokuapp.com"
+elif IS_STAGING_SERVER:
+    pdsDefaultLocation = "https://flufuture-openpds.herokuapp.com"
+else:
+    pdsDefaultLocation = "localhost:8002"
+    
 SERVER_UPLOAD_DIR = '/var/www/trustframework/'
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
