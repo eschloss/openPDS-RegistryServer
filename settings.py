@@ -7,6 +7,7 @@ except:
     BUILD = 'DEV'
 IS_PRODUCTION_SERVER = (BUILD == 'PRODUCTION')
 IS_STAGING_SERVER = (BUILD == 'STAGING')
+IS_DEV_SERVER = not IS_STAGING_SERVER and not IS_PRODUCTION_SERVER
 DEBUG = not IS_PRODUCTION_SERVER
 TEMPLATE_DEBUG = DEBUG
 
@@ -21,7 +22,7 @@ SERVER_UPLOAD_DIR = '/var/www/trustframework/'
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-if DEBUG:
+if IS_DEV_SERVER:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', 
