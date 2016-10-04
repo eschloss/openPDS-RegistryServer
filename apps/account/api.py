@@ -58,14 +58,16 @@ class ProfileResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs): 
         try:
             password = bundle.data["user"].pop("password")
-            logging.debug("PASSWORD: %s" % password)
-            if request:
-                logging.debug("POST: %s" % str(request.POST))
-            bundle = super(ProfileResource, self).obj_create(bundle, request, **kwargs)
+            user = User.objects.create_user(bundle.data["user"]["username"], '', password)
+            user.email = bundle.data["user"]["email"]
+            user.first_name = bundle.data["user"]["first_name"]
+            user.save()
+            bundle.obj.user = user
+            #bundle = super(ProfileResource, self).obj_create(bundle, request, **kwargs)
             logging.debug("Profile Created")
-            bundle.obj.user.set_password(password)
-            logging.debug("User Password Set")
-            bundle.obj.user.save()
+            #bundle.obj.user.set_password(password)
+            #logging.debug("User Password Set")
+            #bundle.obj.user.save()
         except IntegrityError as e:
             logging.debug("INTEGRITY ERROR")
             logging.debug("Integrity Error: %s " % (e.message))
