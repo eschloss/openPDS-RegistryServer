@@ -23,7 +23,7 @@ class UserResource(ModelResource):
             logging.debug("User Created")
         except IntegrityError as e:
             logging.debug("INTEGRITY ERROR")
-            logging.debug("Integrity Error: %s - %s" % (str(e.errno), e.strerror))
+            logging.debug("Integrity Error: %s " % (e.message))
             raise BadRequest('That username already exists.')
         return bundle
 
