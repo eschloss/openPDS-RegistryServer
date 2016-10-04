@@ -59,9 +59,8 @@ class ProfileResource(ModelResource):
         try:
             password = bundle.data["user"].pop("password")
             logging.debug("PASSWORD: %s" % password)
-            logging.debug("BUNDLE: %s" % str(bundle))
-            logging.debug("GET: %s" % str(request.GET))
-            logging.debug("POST: %s" % str(request.POST))
+            if request:
+                logging.debug("POST: %s" % str(request.POST))
             bundle = super(ProfileResource, self).obj_create(bundle, request, **kwargs)
             logging.debug("Profile Created")
             bundle.obj.user.set_password(password)
