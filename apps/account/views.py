@@ -12,7 +12,7 @@ from oauth2app.models import Client, AccessRange
 from django.contrib.admin.views.decorators import staff_member_required
 #from datastoreUtils import *
 import pymongo
-import json, logging
+import json
 
 @login_required
 def clients(request):
@@ -61,11 +61,9 @@ def members(request):
         RequestContext(request))
 
 def signup(request):
-    logging.debug("----------------- SIGN UP --------------------")
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
-            logging.debug("password: %s" % form.cleaned_data["password1"])
             user = User.objects.create_user(
                     form.cleaned_data["username"],
                     form.cleaned_data["username"],

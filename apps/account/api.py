@@ -7,6 +7,7 @@ from tastypie.exceptions import BadRequest
 from django.db import IntegrityError
 from oauth2app.models import Client, AccessRange
 import pdb
+import logging
 
 class UserResource(ModelResource):
     class Meta:
@@ -53,10 +54,12 @@ class ProfileResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs): 
         try:
             password = bundle.data["user"].pop("password")
+            logging.debug("PASSWORD: %s" % password)
             bundle = super(ProfileResource, self).obj_create(bundle, request, **kwargs)
             bundle.obj.user.set_password(password)
             bundle.obj.user.save()
-        except IntegrityError: 
-            raise BadRequest('Username already exists')
+        except IntegrityError as e:
+            raise BadRequest(e.strerror)
+            #raise BadRequest('Username already exists')
         return bundle
 
