@@ -18,8 +18,12 @@ class UserResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs):
         username, password = bundle.data['username'], bundle.data['password']
         try: 
+            logging.debug("Creating User")
             bundle.obj = User.objects.create_user(username, '', password)
-        except IntegrityError:
+            logging.debug("User Created")
+        except IntegrityError as e:
+            logging.debug("INTEGRITY ERROR")
+            logging.debug("Integrity Error: %s - %s" % (str(e.errno), e.strerror))
             raise BadRequest('That username already exists.')
         return bundle
 
@@ -56,10 +60,13 @@ class ProfileResource(ModelResource):
             password = bundle.data["user"].pop("password")
             logging.debug("PASSWORD: %s" % password)
             bundle = super(ProfileResource, self).obj_create(bundle, request, **kwargs)
+            logging.debug("Profile Created")
             bundle.obj.user.set_password(password)
+            logging.debug("User Password Set")
             bundle.obj.user.save()
         except IntegrityError as e:
-            logging.debug("Integrity Error: %s - %s" % (e.errno, e.strerror))
-            raise BadRequest('Blah!!! Username already exists')
+            logging.debug("INTEGRITY ERROR")
+            logging.debug("Integrity Error: %s - %s" % (str(e.errno), e.strerror))
+            raise BadRequest('Username already exists')
         return bundle
 
