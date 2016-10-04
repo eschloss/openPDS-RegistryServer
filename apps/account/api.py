@@ -66,7 +66,7 @@ class ProfileResource(ModelResource):
             bundle.obj.user.save()
         except IntegrityError as e:
             logging.debug("INTEGRITY ERROR")
-            logging.debug("Integrity Error: %s - %s" % (str(e.errno), e.strerror))
+            logging.debug("Integrity Error: %s " % (e.message))
             raise BadRequest('Username already exists')
         return bundle
 
