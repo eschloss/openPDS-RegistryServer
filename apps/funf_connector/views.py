@@ -31,6 +31,7 @@ import requests
 from oauth2app.models import AccessRange, AccessToken
 import apps.oauth2
 from django.contrib.auth.decorators import login_required
+import logging
 
 import pdb
 import traceback
@@ -43,6 +44,7 @@ def insert_pds(profile, token, pds_json):
         # get pds location and user id
 	request_path= "http://"+str(profile.pds_location)+"/api/personal_data/funf/?format=json&bearer_token="+str(token)+"&datastore_owner__uuid="+str(profile.uuid)
 	payload = json.dumps(pds_json)
+	logging.debug("data dumped: %s" % str(payload))
 	r = requests.post(request_path, data=payload, headers= { "content-type": "application/json" })
 	response = r.text
 	#print "PDS POST response:"
@@ -80,6 +82,7 @@ def write_key(request):
 
 def data(request):
     '''decrypt funf database files, and upload them to your PDS'''
+    logging.debug("SENDING data to PDS")
     result = {}
     connection = None
     token = request.GET['bearer_token']
