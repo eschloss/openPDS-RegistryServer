@@ -18,7 +18,7 @@ elif IS_STAGING_SERVER:
 else:
     pdsDefaultLocation = "localhost:8002"
     
-SERVER_UPLOAD_DIR = '/var/www/trustframework/'
+SERVER_UPLOAD_DIR = '/tmp/'
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
