@@ -93,12 +93,14 @@ def data(request):
     pds = None
     scope = AccessRange.objects.get(key="funf_write")
     authenticator = JSONAuthenticator(scope=scope)
+    logging.debug("About to validate request")
     try:
         # Validate the request.
         authenticator.validate(request)
     except AuthenticationException as e:
         # Return an error response.
         print e
+        logging.debug("Request not validated")
         return authenticator.error_response(content="You didn't authenticate.")
     profile = authenticator.user.get_profile()
     funf_password = profile.funf_password
