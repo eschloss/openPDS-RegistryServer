@@ -12,7 +12,7 @@ DEBUG = not IS_PRODUCTION_SERVER
 TEMPLATE_DEBUG = DEBUG
 
 if IS_PRODUCTION_SERVER:
-    pdsDefaultLocation = "flumoji-pds-production.herokuapp.com"
+    pdsDefaultLocation = "flumoji.com"
 elif IS_STAGING_SERVER:
     pdsDefaultLocation = "flufuture-openpds.herokuapp.com"
 else:
