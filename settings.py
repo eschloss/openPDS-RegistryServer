@@ -11,10 +11,8 @@ IS_DEV_SERVER = not IS_STAGING_SERVER and not IS_PRODUCTION_SERVER
 DEBUG = not IS_PRODUCTION_SERVER
 TEMPLATE_DEBUG = DEBUG
 
-if IS_PRODUCTION_SERVER:
-    pdsDefaultLocation = "flumoji.com"
-elif IS_STAGING_SERVER:
-    pdsDefaultLocation = "flufuture-openpds.herokuapp.com"
+if IS_PRODUCTION_SERVER or IS_STAGING_SERVER:
+    pdsDefaultLocation = os.environ['PDS_DEFAULT_LOCATION']
 else:
     pdsDefaultLocation = "localhost:8002"
     
